@@ -3,26 +3,18 @@ import { NextFunction, Request, Response } from "express";
 import { AnySchema } from "yup/lib/schema";
 
 export const ensureValidData =
-  (schema: AnySchema) =>
+  (schema: AnySchema, stripUnknown = true) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const validatedData = await schema.validate(req.body, {
         abortEarly: true,
-        stripUnknown: true,
-        strict: false,
+        stripUnknown,
       });
-
-      console.log(validatedData);
-
-      if (!validatedData) {
-        throw new AppError("Cannot update user", 401);
-      }
 
       req.body = validatedData;
 
       return next();
     } catch (error: any) {
-      console.log(error);
-      throw new AppError(`"Cannot update user"`, 401);
+      throw new AppError("Cannot update user", 401);
     }
   };

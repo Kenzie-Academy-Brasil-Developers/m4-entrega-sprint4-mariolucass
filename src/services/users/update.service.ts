@@ -13,6 +13,13 @@ export const updateUser = async (
   const user = await userRepository.findOneBy({
     id: id,
   });
+
+  for (const key in data) {
+    if (key === "isAdm" || key === "id" || key === "isActive") {
+      throw new AppError("Cannot update user", 401);
+    }
+  }
+
   if (!user) {
     throw new AppError("User not found", 400);
   }
