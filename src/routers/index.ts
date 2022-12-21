@@ -1,2 +1,3 @@
-export { loginRoutes } from "./login/loginRoutes";
-export { userRoutes } from "./user/userRoutes";
+export { sessionRoutes } from "./session/session.routes";
+
+export { userRoutes } from "./users/users.routes";

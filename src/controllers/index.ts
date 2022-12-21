@@ -1,8 +1,10 @@
-export { loginUserController } from "./login/index";
+export { getUsersController } from "./users/list.controller";
 
 export {
-  createUserController,
   updateUserController,
   deleteUserController,
-  getUsersController,
-} from "./user/index";
+} from "./users/update.controller";
+
+export { createUserController } from "./users/create.controller";
+
+export { loginUserController } from "./session/session.controller";

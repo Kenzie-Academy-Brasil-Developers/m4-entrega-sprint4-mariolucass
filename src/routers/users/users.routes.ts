@@ -1,13 +1,13 @@
-import * as middlewares from "./../../middlewares/";
+import * as middlewares from "../../middlewares";
 import * as controllers from "../../controllers";
+import * as serializers from "../../serializers";
 import { Router } from "express";
-import { userCreate, userUpdate } from "../../serializers/user";
 
 export const userRoutes = Router();
 
 userRoutes.post(
   "/",
-  middlewares.ensureValidData(userCreate),
+  middlewares.ensureValidData(serializers.userCreateSerializer),
   middlewares.ensureUserNotExists,
   controllers.createUserController
 );
@@ -21,10 +21,10 @@ userRoutes.get(
 
 userRoutes.patch(
   "/:id",
-  //   middlewares.ensureValidData(userUpdate),
+  //middlewares.ensureValidData(serializers.userUpdateSerializer),
   middlewares.ensureAuthPermissions,
-  middlewares.ensureIsUser,
   middlewares.ensureUserExists,
+  middlewares.ensureIsUser,
   middlewares.ensureUpdateData,
   controllers.updateUserController
 );
