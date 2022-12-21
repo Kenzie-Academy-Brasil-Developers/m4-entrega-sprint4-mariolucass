@@ -21,11 +21,10 @@ userRoutes.get(
 
 userRoutes.patch(
   "/:id",
-  //middlewares.ensureValidData(serializers.userUpdateSerializer),
+  middlewares.ensureValidData(serializers.userUpdateSerializer, false),
   middlewares.ensureAuthPermissions,
   middlewares.ensureUserExists,
   middlewares.ensureIsUser,
-  middlewares.ensureUpdateData,
   controllers.updateUserController
 );
 
