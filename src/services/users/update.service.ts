@@ -47,7 +47,7 @@ export const deleteUser = async (id: string): Promise<{ message: string }> => {
   });
 
   if (!user) {
-    throw new AppError("User not found", 400);
+    throw new AppError("User is not active", 400);
   }
 
   const deletedUser = userRepository.create({
