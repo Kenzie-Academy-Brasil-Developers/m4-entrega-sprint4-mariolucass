@@ -1,7 +1,6 @@
-import { AppError } from "./../../errors/appError";
+import AppDataSource from "../../data-source";
 import { IUser } from "../../interfaces/users/index";
 import { User } from "../../entities/user.entity";
-import AppDataSource from "../../data-source";
 import { usersWithoutPasswordSerializer } from "../../serializers/users/return.serializers";
 
 export const listUsers = async (): Promise<Array<IUser>> => {

@@ -24,7 +24,6 @@ export const ensureAuthPermissions = async (
     req.user = {
       id: decoded.sub,
       isAdm: decoded.isAdm,
-      isActive: decoded.isActive,
     };
   });
   return next();

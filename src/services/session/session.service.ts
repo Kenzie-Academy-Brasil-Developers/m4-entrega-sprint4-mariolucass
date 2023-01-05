@@ -1,8 +1,8 @@
+import AppDataSource from "../../data-source";
 import { AppError } from "../../errors/appError";
 import { User } from "../../entities/user.entity";
 import { IUserLogin } from "../../interfaces/users/index";
 import { compare } from "bcryptjs";
-import AppDataSource from "../../data-source";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
@@ -26,7 +26,6 @@ export const loginUser = async (
   const token = jwt.sign(
     {
       isAdm: user.isAdm,
-      isActive: user.isActive,
     },
 
     process.env.SECRET_KEY!,

@@ -1,6 +1,6 @@
+import AppDataSource from "../../data-source";
 import { userWithoutPasswordSerializer } from "../../serializers";
 import { User } from "../../entities/user.entity";
-import AppDataSource from "../../data-source";
 import { IUser, IUserRequest } from "../../interfaces/users/index";
 
 export const createUser = async (data: IUserRequest): Promise<IUser> => {

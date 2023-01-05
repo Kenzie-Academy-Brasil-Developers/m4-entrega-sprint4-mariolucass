@@ -1,7 +1,7 @@
+import AppDataSource from "../../data-source";
 import { AppError } from "./../../errors/appError";
 import { userWithoutPasswordSerializer } from "../../serializers";
 import { User } from "../../entities/user.entity";
-import AppDataSource from "../../data-source";
 import { IUser, IUserUpdate } from "../../interfaces/users/index";
 import "dotenv/config";
 
@@ -18,10 +18,6 @@ export const updateUser = async (
     if (key === "isAdm" || key === "id" || key === "isActive") {
       throw new AppError("Cannot update user", 401);
     }
-  }
-
-  if (!user) {
-    throw new AppError("User not found", 400);
   }
 
   const updateUser = userRepository.create({
@@ -43,16 +39,15 @@ export const updateUser = async (
 
 export const deleteUser = async (id: string): Promise<{ message: string }> => {
   const userRepository = AppDataSource.getRepository(User);
-  const user = await userRepository.findOneBy({
-    id: id,
+  const user = await userRepository.findOne({
+    where: {
+      id: id,
+      isActive: true,
+    },
   });
 
   if (!user) {
     throw new AppError("User not found", 400);
-  }
-
-  if (user.isActive === false) {
-    throw new AppError("Cannot delete this user", 400);
   }
 
   const deletedUser = userRepository.create({
